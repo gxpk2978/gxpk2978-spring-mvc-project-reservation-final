@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PERSONAL_INFO">
+
+<insert id="insert" parameterType="hashMap">
+    <![CDATA[
+      insert into PERSONAL_INFO 
+      ( GENDER, NAME, RESIDENT_ID, ADDRESS,PHONE_NUMBER)
+      values
+       (#{gender}, #{name}, #{resident_id}, #{address},#{phone_number})
+    ]]>
+</insert>
+
+
+  <!-- 조회  -->
+	<select id="selectOne" parameterType="hashMap" resultType ="hashMap">
+	<![CDATA[
+		select GENDER, NAME, RESIDENT_ID, ADDRESS,PHONE_NUMBER
+		from PERSONAL_INFO
+		where
+		 NAME = #{name} AND RESIDENT_ID = #{resident_id}
+	]]>
+	</select>
+
+   <!-- 수정  : VO를 파라미터 타입으로 했고 마이바티스가 클래스의 메소드를 통해 멤버변수에 접근-->
+	<update id = "update" parameterType="hashMap" >
+	<![CDATA[
+		UPDATE PERSONAL_INFO
+		SET
+			GENDER = #{gender},
+			ADDRESS = #{address},
+			PHONE_NUMBER = #{phone_number},
+			NAME = #{name}
+		WHERE
+		RESIDENT_ID = #{resident_id}
+	]]>
+	</update>
+	
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+	
+		<![CDATA[
+		DELETE FROM PERSONAL_INFO
+		WHERE
+		RESIDENT_ID = #{resident_id}
+		]]>
+	</delete>
+
+
+</mapper>

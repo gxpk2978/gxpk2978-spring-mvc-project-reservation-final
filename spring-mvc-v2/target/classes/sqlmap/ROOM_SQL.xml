@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ROOM">
+
+
+
+  <!-- 조회  -->
+	<select id="selectOne" parameterType="String" resultType="String">
+	<![CDATA[
+		 SELECT ROOMSTATUS FROM ROOM
+            WHERE ROOMNUMBER = #{roomStatus}
+	]]>
+	</select>
+
+   <!-- 수정  : VO를 파라미터 타입으로 했고 마이바티스가 클래스의 메소드를 통해 멤버변수에 접근-->
+	<update id = "update" parameterType="hashMap" >
+	<![CDATA[
+		
+	]]>
+	</update>
+	
+
+
+
+</mapper>
