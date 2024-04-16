@@ -93,7 +93,7 @@
     <img src="resources/image/image.jpg" alt="로그인 이미지"  style="width: 25%; border: 2px solid #ccc; border-radius: 10px;"><br>
 
     <h1>Log In</h1>
-    
+    <h1>커밋확인용</h1>
     <form  method="post">
         <input type="text" name="customer_id" placeholder="아이디"><br>
         <input type="password" name="password" placeholder="비밀번호"><br>
