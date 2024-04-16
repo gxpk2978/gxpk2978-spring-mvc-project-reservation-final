@@ -1,6 +1,5 @@
 package v2.mvc.spring.reservation.service.Impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +13,61 @@ public class reservationServiceImpl implements ReservationService {
 	@Autowired
 	private ReservationDAO reservationDAO;
 	
-	
+	//회원가입
 	@Override
 	public boolean create(Map<String, Object> map) {
 	
 		return reservationDAO.insert(map);
 	}
 
-	//룸조회
-	@Override
-	public boolean readRoom(String roomStatus) {
-		
-		return reservationDAO.selectOneRoom(roomStatus);
-	}
+	
 
 	//예약 생성
 	@Override
-	public String createReservation(HashMap<String, Object> map) {
+	public String createReservation(Map<String, Object> map) {
 		
 		return reservationDAO.createReservation(map);
 	}
+
+
+	//로그인 조회
+	@Override
+	public boolean logInRead(Map<String, Object> map) {
+		
+		return reservationDAO.logInRead(map);
+	}
+
+
+
+	@Override
+	public Map<String, Object> totalRead(String customer_id) {
+		
+		return reservationDAO.totalRead(customer_id);
+	}
+
+
+
+	@Override
+	public boolean reservationUpdate(Map<String, Object> map) {
+		
+		return reservationDAO.reservationUpdate(map);
+	}
+
+
+
+	@Override
+	public boolean reservationDelete(String roomNumber) {
+		// TODO Auto-generated method stub
+		return  reservationDAO.reservationDelete(roomNumber);
+	}
+
+
+
+
+
+
+
+
+	
 
 }

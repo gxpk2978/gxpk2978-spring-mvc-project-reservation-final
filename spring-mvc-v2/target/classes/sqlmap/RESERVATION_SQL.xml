@@ -13,11 +13,81 @@
       insert into RESERVATION 
       ( RESERVATION_ID, CUSTOMER_ID, ROOMNUMBER, NUMBER_OF_PEOPLE)
       values
-       (#{reservation_id}, #{customer_id}, #{selectedSeat}, #{numberOfPeople})
+       (#{reservation_id}, #{custom_id}, #{roomNumber}, #{numberOfPeople})
     ]]>
 </insert>
+ 
+ 
+  <!-- id pw 조회  -->
+	<select id="selectOne" parameterType="hashMap" resultType="hashMap">
+    <![CDATA[
+        SELECT CUSTOMER_ID, NAME, PHONE_NUMBER, EMAIL, PASSWORD
+        FROM CUSTOMER
+        WHERE CUSTOMER_ID = #{customer_id} AND PASSWORD = #{password}
+    ]]>
+</select>
+	
+ 
+ <select id="selectOneTotal" parameterType="string" resultType="hashMap">
+    SELECT 
+        c.CUSTOMER_ID, c.NAME, c.PHONE_NUMBER, c.PASSWORD, c.EMAIL, 
+        r.RESERVATION_ID, r.CUSTOMER_ID, r.ROOMNUMBER, r.NUMBER_OF_PEOPLE,
+        rm.ROOMNUMBER, rm.ROOMSTATUS
+    FROM CUSTOMER c
+    LEFT JOIN RESERVATION r ON c.CUSTOMER_ID = r.CUSTOMER_ID
+    LEFT JOIN ROOM rm ON r.ROOMNUMBER = rm.ROOMNUMBER
+    WHERE c.CUSTOMER_ID = #{customer_id}
+</select>
+ 
+ <select id="getPreviousReservation" parameterType="String" resultType="String">
+    SELECT ROOMNUMBER
+    FROM RESERVATION
+    WHERE CUSTOMER_ID = #{custom_id}
+</select>
+ 
 
+<update id="updateRoomStatus" parameterType="String">
+    <!-- 기존 예약의 방 상태를 empty로 변경 -->
+    UPDATE room
+    SET ROOMSTATUS = 'empty'
+    WHERE ROOMNUMBER = #{oldRoomNumber}
+</update>
 
+<update id="updateRoomStatusToFull" parameterType="String">
+    <!-- 새로운 예약의 방 상태를 full로 변경 -->
+    UPDATE room
+    SET ROOMSTATUS = 'full'
+    WHERE ROOMNUMBER = #{roomNumber}
+</update>
 
+<update id="update" parameterType="hashMap">
+    <!-- 새로운 예약의 정보를 업데이트 -->
+    UPDATE RESERVATION
+    SET NUMBER_OF_PEOPLE = #{numberOfPeople},
+        ROOMNUMBER = #{roomNumber}
+    WHERE CUSTOMER_ID = #{custom_id}
+</update>
+ 
+ 
+ <delete id="delete" parameterType="String">
+    
+    DELETE FROM RESERVATION
+    WHERE ROOMNUMBER = #{roomNumber}
+</delete>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 </mapper>
