@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoomMapper">
+    <select id="getAllRooms" resultType="v2.mvc.spring.reservation.vo.Room">
+        <![CDATA[
+        SELECT ROOMNUMBER, ROOMSTATUS FROM ROOM
+        ]]>
+    </select>
+    
+    <update id="update" parameterType="string">
+    <![CDATA[
+        UPDATE ROOM
+        SET ROOMSTATUS = 'full'
+        WHERE ROOMNUMBER = #{number} AND ROOMSTATUS = 'empty'
+    ]]>
+	</update>
+    
+    
+</mapper>
